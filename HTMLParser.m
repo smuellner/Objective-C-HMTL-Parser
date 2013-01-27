@@ -16,7 +16,7 @@
 	if (_doc == NULL)
 		return NULL;
 	
-	return [[[HTMLNode alloc] initWithXMLNode:(xmlNode*)_doc] autorelease];
+	return [[HTMLNode alloc] initWithXMLNode:(xmlNode*)_doc];
 }
 
 -(HTMLNode*)html
@@ -41,6 +41,14 @@
 		return NULL;
 	
 	return [[self doc] findChildTag:@"body"];
+}
+
+-(HTMLNode*)frameset
+{
+	if (_doc == NULL)
+		return NULL;
+	
+	return [[self doc] findChildTag:@"frameset"];
 }
 
 -(id)initWithString:(NSString*)string error:(NSError**)error
@@ -109,13 +117,13 @@
 
 	if (_data == nil || *error)
 	{
-		[_data release];
+		_data = nil;
 		return nil;
 	}
 	
 	self = [self initWithData:_data error:error];
 	
-	[_data release];
+    _data = nil;
 	
 	return self;
 }
@@ -127,8 +135,6 @@
 	{
 		xmlFreeDoc(_doc);
 	}
-	
-	[super dealloc];
 }
 
 @end

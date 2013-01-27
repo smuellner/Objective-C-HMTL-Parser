@@ -28,6 +28,9 @@
 //Returns the body tag
 -(HTMLNode*)body;
 
+//Returns the frameset tag
+-(HTMLNode*)frameset;
+
 //Returns the html tag
 -(HTMLNode*)html;
 
